@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Glycemic Idex of Foods</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <style>
+  img {
+      width: 50%;
+      margin: auto;
+  }
+  </style>
+</head>
+<body>
+
+<script type="text/template" id="tmpl-fgi">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>GI</th>
+        <th>Energy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% _.each(gis, function(gi){ %>
+      <tr>
+        <td><%= gi.foodName %> <%= gi.foodNameChinese %></td>
+        <td><%= gi.giValue %></td>
+        <td><%= gi.energy %></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</script>
+
+<div class="container">
+  <div class="row">
+    <div class="pull-left">
+      <h2>Glycemic Index of Foods<small>食物升糖指數</small></h2>
+    </div>
+    <div class="pull-right">
+      <br>
+      <div class="pull-left">
+        <input class="form-control" placeholder="Search Food">
+        &nbsp;
+      </div>
+      <div class="pull-right">
+        <a href="#" class="btn btn-info"><span class="glyphicon glyphicon-search"></span></a>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <ul class="nav nav-pills">
+      <li><a id='category' data-category="Dairies" data-toggle="pill" href="#Dairies">Dairies 乳製品</a></li>
+      <li><a id='category' data-category="Meats" data-toggle="pill" href="#Meats">Meats 肉類</a></li>
+      <li class="active"><a id='category' data-category="Grains" data-toggle="pill" href="#Grains">Grains 穀物</a></li>
+      <li><a id='category' data-category="Beans" data-toggle="pill" href="#Beans">Beans 豆類</a></li>
+      <li><a id='category' data-category="Vegetables" data-toggle="pill" href="#Vegatables">Vegetables 蔬菜</a></li>
+      <li><a id='category' data-category="Fruits" data-toggle="pill" href="#Fruits">Fruits 水果</a></li>
+    </ul>
+  </div>
+
+  
+  <div class="tab-content">
+    <div id="Dairies" class="tab-pane fade">
+    	<img src="http://svsaqua.com/wp-content/uploads/2013/09/dairy-products.jpg">
+    	<div>
+    	  <h3>Dairies 乳製品</h3>
+    	  <p>Products from animal milk</p>
+    	  <p>以奶類為基本原料加工而成的食品。除各種直接使用奶製成的飲料外還包括通過發酵獲得的食品（奶酪和奶油）以及對奶進行乾燥或者提煉後獲得的高濃度製品（比如奶粉，煉乳等）。</p>
+    	</div>
+    	<div id='listDairies'>
+		</div>
+    </div>
+    <div id="Meats" class="tab-pane fade">
+    	<img src="http://rivesqualitymeats.com/wp-content/uploads/2013/08/rives_quality_meats_2013.jpg">
+    	<div>
+    	  <h3>Meats 肉類</h3>
+    	  <p>Meat is animal flesh that is eaten as food</p>
+    	  <p>各種動物身上可供食用的肉及一些其他組織，經過不同程度及方法的加工，成為不同種類的肉類食物。</p>
+    	</div>
+    	<div id='listMeats'>
+		</div>
+    </div>
+    <div id="Grains" class="tab-pane fade in active">
+    	<br>
+    	<img src="http://www.myfoodienoodie.com/wp-content/uploads/2015/08/grains.png">
+    	<div class="">
+    	  <h3>Grains 穀物</h3>
+    	  <p>Grains are small, hard, dry seeds, with or without attached hulls or fruit layers, harvested for human or animal consumption.</p>
+    	  <p>穀物主要指禾本科糧食作物及其種子。</p>
+    	</div>
+    	<div id='listGrains'>
+		</div>
+    </div>
+    <div id="Beans" class="tab-pane fade">
+    	<img src="http://toddsseeds.com/wp-content/uploads/2014/05/dry-beans.jpg">
+    	<div>
+    	  <h3>Beans 豆類</h3>
+    	  <p>Bean is a common name for large plant seeds of several genera of the family Fabaceae (alternately Leguminosae) which are used for human or animal food.</p>
+    	  <p>豆類指雙子葉植物中離瓣植物豆科的泛稱，因而概稱為豆類植物，亦或稱豆子，指其使用的種子。</p>
+    	</div>
+     	<div id='listBeans'>
+		</div>
+    </div>
+    <div id="Vegatables" class="tab-pane fade">
+    	<br>
+    	<img src="http://www.apnewstimes.com/wp-content/uploads/2015/02/Vegetables.jpg">
+    	<div>
+    	  <h3>Vegatables 蔬菜</h3>
+    	  <p>a vegetable is any part of a plant that is consumed by humans</p>
+    	  <p>指可以做菜、烹飪成為食品的，除了穀物以外的其他植物（多屬於草本）。</p>
+    	</div>
+    	<div id='listVegetables'>
+		</div>
+    </div>
+    <div id="Fruits" class="tab-pane fade">
+    	<img src="http://wearelivingalive.com/wp-content/uploads/2015/04/fruits-berries-citrus-fruits-oranges-lemons-bananas-pears-apples-peaches-nectarines-plums.jpg">
+    	<div>
+    	  <h3>Fruits 水果</h3>
+    	  <p>Fruit normally means the fleshy seed-associated structures of a plant that are sweet or sour and edible in the raw state</p>
+    	  <p>指可以生食，多汁液，有酸味或甜味的果實。</p>
+    	</div>
+    	<div id='listFruits'>
+		</div>
+    </div>
+  </div>
+</div>
+
+
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="vendor/underscore/underscore-min.js"></script>
+    <script src="vendor/backbone/backbone-min.js"></script>
+	<script src='javascripts/fgi.js'></script>
+
+
+</body>
+</html>
